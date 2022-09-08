@@ -12,7 +12,7 @@ public class IniciarJuegoUseCase extends UseCaseForCommand<IniciarJuegoCommand> 
 
     private final JuegoDomainEventRepository repository;
 
-    public IniciarJuegoUseCase(JuegoDomainEventRepository repository) {
+    public IniciarJuegoUseCase(JuegoDomainEventRepository repository){
         this.repository = repository;
     }
 

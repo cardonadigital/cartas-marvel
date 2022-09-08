@@ -8,6 +8,9 @@ import co.com.sofka.domain.generic.Command;
 public class IniciarJuegoCommand extends Command {
     private String juegoId;
 
+    public IniciarJuegoCommand(String id) {
+    }
+
     /**
      * Gets juego id.
      *
