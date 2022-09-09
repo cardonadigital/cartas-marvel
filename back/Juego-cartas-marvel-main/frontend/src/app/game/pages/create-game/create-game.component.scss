@@ -1,0 +1,35 @@
+.create-card {
+  background-image: url("../../../../assets/news_articles-mas_dsk_01.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  padding-top: 100px;
+}
+
+.color-message {
+  color: rgb(185 28 28);
+  opacity: .7;
+}
+
+.image-user {
+  img {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.online{
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+
+.offline{
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: gray;
+}
