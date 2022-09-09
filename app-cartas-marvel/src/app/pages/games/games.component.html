@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-around mt-5">
+<button class="btn btn-primary" (click)="logOut()">LogOut</button>
+<button class="btn btn-primary" (click)="createLobby()">
+    crearLobby</button>
+</div>
+
+
+<div class="mt-5">
+    <div *ngFor="let lobbi of lobbiesGame; let i = index">
+        <app-lobbies [lobbi]="lobbi" [index]="i"></app-lobbies>
+    </div>
+</div>
