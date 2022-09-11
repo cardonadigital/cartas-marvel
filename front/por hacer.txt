@@ -1,0 +1,9 @@
+guard**
+logout**
+
+
+lista usuarios para game
+lobby(lista games)
+ ultimo que entra son cuatro pone lobby false
+
+
