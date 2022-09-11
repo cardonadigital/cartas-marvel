@@ -1,0 +1,15 @@
+<button class="btn btn-primary mt-2" (click)="volver()">Volver a los lobbies</button>
+
+<div class="text-center">
+    <h3>Lista de Juegos</h3>
+</div>
+
+
+
+<div class="">
+    <ul class="list-group mt-5 d-flex align-items-center" *ngFor="let juego of juegos;let i=index">
+        <li class="list-group-item d-flex justify-content-around">
+            <h4>juego{{i+1}} jugadores:{{juego.cantidadJugadores}}</h4>
+        </li>
+      </ul>
+</div>
