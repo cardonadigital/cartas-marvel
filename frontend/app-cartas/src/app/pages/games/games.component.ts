@@ -5,6 +5,7 @@ import { getAuth } from '@angular/fire/auth';
 import { collection, doc, Firestore, setDoc, addDoc } from '@angular/fire/firestore';
 import { Lobby } from '../../models/lobby.model';
 import { LobbiesService } from 'src/app/services/lobbies.service';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-games',
@@ -16,6 +17,8 @@ export class GamesComponent implements OnInit{
   lobbies2:Array<Lobby>;
   lobbiesGame:Array<Lobby>
   lobby:Lobby;
+
+  lobbyId = uuid.v4();
 
   constructor(
     private authService: AuthService, 
@@ -57,6 +60,20 @@ export class GamesComponent implements OnInit{
     const refUser = doc(data, this.lobby.id);
     return setDoc(refUser, this.lobby);
     /* return addDoc(data, this.lobby) */
+  }
+
+  createLobby2(){
+    const user = getAuth().currentUser;
+    const name = user.displayName;
+    const idUser = user.uid;
+    this.lobby = {
+      id: this.lobbyId,
+      usuarios: [{name: name, id:idUser}],
+      full:false
+    }
+    const data = collection(this.firesStore, 'lobbies');
+    const refUser = doc(data, this.lobby.id);
+    return setDoc(refUser, this.lobby);
   }
 
   listaJuegos(){

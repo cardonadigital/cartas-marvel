@@ -4,17 +4,13 @@ import co.com.sofka.domain.generic.EventChange;
 import org.example.cardgame.domain.events.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
 
 /**
  * The type Juego event change.
  */
 public class JuegoEventChange extends EventChange {
-    /**
-     * Instantiates a new Juego event change.
-     *
-     * @param juego the juego
-     */
     public JuegoEventChange(Juego juego) {
         apply((JuegoCreado event) -> {
             juego.jugadores = new HashMap<>();
@@ -27,7 +23,7 @@ public class JuegoEventChange extends EventChange {
         });
 
         apply((RondaCreada event) -> {
-            if (Objects.isNull(juego.tablero)) {
+            if(Objects.isNull(juego.tablero)){
                 throw new IllegalArgumentException("Debe existir el tablero primero");
             }
             juego.ronda = event.getRonda();
@@ -43,6 +39,9 @@ public class JuegoEventChange extends EventChange {
         });
 
         apply((CartaPuestaEnTablero event) -> {
+            if(Boolean.FALSE.equals(juego.tablero.estaHabilitado())){
+                throw new IllegalArgumentException("No se puedo apostar porque el tablero no esta habilitado");
+            }
             juego.tablero.adicionarPartida(event.getJugadorId(), event.getCarta());
         });
 
@@ -57,6 +56,7 @@ public class JuegoEventChange extends EventChange {
         apply((RondaIniciada event) -> {
             juego.ronda = juego.ronda.iniciarRonda();
             juego.tablero.habilitarApuesta();
+            juego.tablero.partida().forEach((key, value) -> juego.tablero.partida().put(key,new HashSet<>()));
         });
 
         apply((RondaTerminada event) -> {
@@ -65,7 +65,7 @@ public class JuegoEventChange extends EventChange {
         });
 
         apply((CartasAsignadasAJugador event) -> {
-            var jugador = juego.jugadores().get(event.getGanadorId());
+            var jugador =  juego.jugadores().get(event.getGanadorId());
             event.getCartasApuesta().forEach(jugador::agregarCartaAMazo);
         });
 

@@ -56,13 +56,13 @@ class IniciarJuegoUseCaseTest {
     private Flux<DomainEvent> obtenerEventos() {
 
         var cartas = Set.of(
-                new Carta(CartaMaestraId.of("s1"), 500, false, false),
-                new Carta(CartaMaestraId.of("s2"), 100, false, false),
-                new Carta(CartaMaestraId.of("s3"), 200, false, false),
-                new Carta(CartaMaestraId.of("s4"), 300, false, false),
-                new Carta(CartaMaestraId.of("s5"), 400, false, false),
-                new Carta(CartaMaestraId.of("s6"), 400, false, false),
-                new Carta(CartaMaestraId.of("s7"), 400, false, false)
+                new Carta(CartaMaestraId.of("s1"), 500, false, false, "img.jpg"),
+                new Carta(CartaMaestraId.of("s2"), 100, false, false, "img.jpg"),
+                new Carta(CartaMaestraId.of("s3"), 200, false, false, "img.jpg"),
+                new Carta(CartaMaestraId.of("s4"), 300, false, false, "img.jpg"),
+                new Carta(CartaMaestraId.of("s5"), 400, false, false, "img.jpg"),
+                new Carta(CartaMaestraId.of("s6"), 400, false, false, "img.jpg"),
+                new Carta(CartaMaestraId.of("s7"), 400, false, false, "img.jpg")
         );
 
         return Flux.just(

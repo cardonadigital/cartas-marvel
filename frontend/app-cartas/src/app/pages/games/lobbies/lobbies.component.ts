@@ -37,6 +37,11 @@ export class LobbiesComponent {
        
    }
 
-
+   eliminar(lobbyId){
+    const user = getAuth().currentUser;
+    const name = user.displayName;
+    this.lobbyService.deleteDocument(lobbyId);
+    console.log('eliminado');
+   }
 
 }

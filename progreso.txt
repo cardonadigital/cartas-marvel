@@ -1,0 +1,11 @@
+carga peresoza
+ronda
+
+crear juego*
+iniciar juego
+crear ronda
+
+---gettablero()
+
+
+ioniciar ronda

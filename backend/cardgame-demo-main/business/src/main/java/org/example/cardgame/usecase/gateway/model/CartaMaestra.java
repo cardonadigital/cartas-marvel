@@ -6,9 +6,10 @@ public class CartaMaestra {
     private String uri;
     private Integer poder;
 
-    public CartaMaestra(String id, String nombre) {
+    public CartaMaestra(String id, String nombre, String imagen) {
         this.id = id;
         this.nombre = nombre;
+        this.uri = imagen;
     }
 
     public CartaMaestra() {

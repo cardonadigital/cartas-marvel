@@ -14,7 +14,9 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @EnableAsync
@@ -121,9 +123,9 @@ public class GameMaterializeHandle {
         data.set("fecha", Instant.now());
         data.set("tiempo", 0);
         data.set("ronda.estaIniciada", false);
-        data.set("tablero.cartas", new HashMap<>());
+        /*data.set("tablero.cartas", new HashMap<>());*/
         data.set("tablero.habilitado", false);
-        data.set("ronda.jugadores", event.getJugadorIds());
+        data.push("ronda.jugadores", event.getJugadorIds());
 
         template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
     }
@@ -131,6 +133,8 @@ public class GameMaterializeHandle {
     @EventListener
     public void handleRondaIniciada(RondaIniciada event){
         var data = new Update();
+        data.set("tablero.cartas", new HashMap<>());
+        ///
         data.set("fecha", Instant.now());
         data.set("tablero.habilitado", true);
 

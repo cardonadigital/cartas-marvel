@@ -25,7 +25,7 @@ public class MazoViewModel {
 
     public static class Carta {
         private  String cartaId;
-        private  String jugadorId;
+        private  String imagen;
         private  Boolean estaOculta;
         private  Boolean estaHabilitada;
         private  Integer poder;
@@ -63,11 +63,11 @@ public class MazoViewModel {
         }
 
         public String getJugadorId() {
-            return jugadorId;
+            return imagen;
         }
 
-        public void setJugadorId(String jugadorId) {
-            this.jugadorId = jugadorId;
+        public void setImagen(String imagen) {
+            this.imagen = imagen;
         }
 
         @Override

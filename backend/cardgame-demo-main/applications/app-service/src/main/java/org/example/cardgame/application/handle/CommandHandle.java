@@ -1,15 +1,19 @@
 package org.example.cardgame.application.handle;
 
+import org.example.cardgame.application.handle.model.JuegoListViewModel;
 import org.example.cardgame.domain.command.*;
 import org.example.cardgame.usecase.usecase.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
@@ -37,6 +41,8 @@ public class CommandHandle {
     }
 
 
+    /* DESCOMENTAR
+
     @Bean
     public RouterFunction<ServerResponse> iniciar(IniciarJuegoUseCase usecase) {
         return route(
@@ -47,7 +53,31 @@ public class CommandHandle {
                         .onErrorResume(errorHandler::badRequest)
 
         );
+    }*/
+
+    @Bean
+    public RouterFunction<ServerResponse> iniciar(IniciarJuegoUseCase usecase) {
+        return route(
+                POST("/juego/iniciar").and(accept(MediaType.APPLICATION_JSON)),
+                request -> usecase.andThen(integrationHandle)
+                        .apply(request.bodyToMono(IniciarJuegoCommand.class))
+                        .then(ServerResponse.ok().build())
+                        .onErrorResume(errorHandler::badRequest)
+        );
     }
+
+
+    /*@Bean
+    public RouterFunction<ServerResponse> listarJuego() {
+        return route(
+                GET("/juego/listar/{id}"),
+                request -> template.find(filterByUId(request.pathVariable("id")), JuegoListViewModel.class, "gameview")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), JuegoListViewModel.class)))
+        );
+    }*/
 
     @Bean
     public RouterFunction<ServerResponse> iniciarRonda(IniciarRondaUseCase usecase) {
@@ -86,7 +116,4 @@ public class CommandHandle {
 
         );
     }
-
-
-
 }

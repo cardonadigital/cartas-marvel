@@ -13,13 +13,7 @@ public class CartaPuestaEnTablero extends DomainEvent {
     private final JugadorId jugadorId;
     private final Carta carta;
 
-    /**
-     * Instantiates a new Carta puesta en tablero.
-     *
-     * @param tableroId the tablero id
-     * @param jugadorId the jugador id
-     * @param carta     the carta
-     */
+
     public CartaPuestaEnTablero(TableroId tableroId, JugadorId jugadorId, Carta carta) {
         super("cardgame.ponercartaentablero");
         this.tableroId = tableroId;
@@ -27,29 +21,14 @@ public class CartaPuestaEnTablero extends DomainEvent {
         this.carta = carta;
     }
 
-    /**
-     * Gets tablero id.
-     *
-     * @return the tablero id
-     */
     public TableroId getTableroId() {
         return tableroId;
     }
 
-    /**
-     * Gets jugador id.
-     *
-     * @return the jugador id
-     */
     public JugadorId getJugadorId() {
         return jugadorId;
     }
 
-    /**
-     * Gets carta.
-     *
-     * @return the carta
-     */
     public Carta getCarta() {
         return carta;
     }

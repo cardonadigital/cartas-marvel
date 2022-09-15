@@ -16,6 +16,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { LobbiesComponent } from './pages/games/lobbies/lobbies.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GamesModule } from './games/games.module';
+import { WinnerComponent } from './pages/winner/winner.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GamesModule } from './games/games.module';
     GamesComponent,
     LobbyComponent,
     GameComponent,
-    LobbiesComponent
+    LobbiesComponent,
+    WinnerComponent
   ],
   imports: [
     AppRoutingModule,

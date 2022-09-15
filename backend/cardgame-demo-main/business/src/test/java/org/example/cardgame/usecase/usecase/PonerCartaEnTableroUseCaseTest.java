@@ -46,22 +46,21 @@ class PonerCartaEnTableroUseCaseTest {
         command.setJuegoId("fffff");
         command.setJugadorId("yyyyy");
         when(repository.obtenerEventosPor("fffff")).thenReturn(history());
+
         StepVerifier.create(useCase.apply(Mono.just(command)))//act
-                /*.expectNextMatches(domainEvent -> {
+                .expectNextMatches(domainEvent -> {
                     var event = (CartaPuestaEnTablero) domainEvent;
                     Assertions.assertEquals("yyyyy", event.getJugadorId().value());
                     return "xxxxx".equals(event.getCarta().value().cartaId().value());
-                })*/
-                /*.expectNextMatches(domainEvent -> {
+                })
+                .expectNextMatches(domainEvent -> {
                     var event = (CartaQuitadaDelMazo) domainEvent;
                     Assertions.assertEquals("yyyyy", event.getJugadorId().value());
                     return "xxxxx".equals(event.getCarta().value().cartaId().value());
-                })*/
+                })
                 .expectComplete()
                 .verify();
     }
-
-
 
     private Flux<DomainEvent> history() {
         var jugadorId = JugadorId.of("yyyyy");
@@ -69,7 +68,7 @@ class PonerCartaEnTableroUseCaseTest {
         var cartas = Set.of(new Carta(
                 CartaMaestraId.of("xxxxx"),
                 20,
-                false, true
+                false, true, "img.jpg"
         ));
         var ronda = new Ronda(1, Set.of(jugadorId, jugador2Id));
         return Flux.just(

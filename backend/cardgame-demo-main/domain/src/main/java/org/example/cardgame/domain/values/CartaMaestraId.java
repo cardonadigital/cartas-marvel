@@ -13,7 +13,7 @@ public class CartaMaestraId extends Identity {
 
     }
 
-    private CartaMaestraId(String id) {
+    public CartaMaestraId(String id) {
         super(id);
     }
 

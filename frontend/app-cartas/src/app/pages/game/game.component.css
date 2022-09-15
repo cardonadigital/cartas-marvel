@@ -1,0 +1,13 @@
+.tablero{
+    height: 60vh;
+    background-color: aqua;
+    background-image: url('../../../assets/tablero2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.carta{
+    height: 200px;
+    width: 110px;
+}

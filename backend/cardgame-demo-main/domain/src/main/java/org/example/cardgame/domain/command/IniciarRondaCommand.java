@@ -6,6 +6,7 @@ import co.com.sofka.domain.generic.Command;
  * The type Iniciar ronda command.
  */
 public class IniciarRondaCommand extends Command {
+
     private String juegoId;
 
     /**

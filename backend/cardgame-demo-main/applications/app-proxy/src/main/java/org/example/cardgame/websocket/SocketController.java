@@ -42,7 +42,6 @@ public class SocketController {
     public void onClose(Session session, @PathParam("correlationId") String correlationId) {
         sessions.get(correlationId).remove(session.getId());
         logger.info("Desconnect by " + correlationId);
-
     }
 
     @OnError

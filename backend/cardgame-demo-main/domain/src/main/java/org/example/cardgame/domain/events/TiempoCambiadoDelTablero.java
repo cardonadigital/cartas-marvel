@@ -22,6 +22,7 @@ public class TiempoCambiadoDelTablero extends DomainEvent {
         this.tiempo = tiempo;
     }
 
+
     /**
      * Gets tiempo.
      *

@@ -61,18 +61,18 @@ class CrearJuegoUseCaseTest {
     private Flux<CartaMaestra> cartasJuego() {
 
         return Flux.just(
-                new CartaMaestra("cadf","prueba #1"),
-                new CartaMaestra("cfd2","prueba #2"),
-                new CartaMaestra("cadf","prueba #3"),
-                new CartaMaestra("cdsf","prueba #5"),
-                new CartaMaestra("cdf","prueba #6"),
-                new CartaMaestra("cs","prueba #7"),
-                new CartaMaestra("casad","prueba #8"),
-                new CartaMaestra("cadfssa","prueba #9"),
-                new CartaMaestra("cf","prueba #10"),
-                new CartaMaestra("sad","ewr #10"),
-                new CartaMaestra("dere","ewre0"),
-                new CartaMaestra("derer4e","pewr10")
+                new CartaMaestra("cadf","prueba #1", "img.jpg"),
+                new CartaMaestra("cfd2","prueba #2", "img.jpg"),
+                new CartaMaestra("cadf","prueba #3", "img.jpg"),
+                new CartaMaestra("cdsf","prueba #5", "img.jpg"),
+                new CartaMaestra("cdf","prueba #6", "img.jpg"),
+                new CartaMaestra("cs","prueba #7", "img.jpg"),
+                new CartaMaestra("casad","prueba #8", "img.jpg"),
+                new CartaMaestra("cadfssa","prueba #9", "img.jpg"),
+                new CartaMaestra("cf","prueba #10", "img.jpg"),
+                new CartaMaestra("sad","ewr #10", "img.jpg"),
+                new CartaMaestra("dere","ewre0", "img.jpg"),
+                new CartaMaestra("derer4e","pewr10", "img.jpg")
 
         );
     }

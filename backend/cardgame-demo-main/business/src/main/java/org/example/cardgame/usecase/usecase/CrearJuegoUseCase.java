@@ -39,8 +39,8 @@ public class CrearJuegoUseCase extends UseCaseForCommand<CrearJuegoCommand> {
 
     private Mazo generarMazo(List<CartaMaestra> cartas) {
         Collections.shuffle(cartas);
-        var lista = cartas.stream().limit(6)
-                .map(carta -> new Carta(CartaMaestraId.of(carta.getId()), carta.getPoder(), false, true))
+        var lista = cartas.stream().limit(2)
+                .map(carta -> new Carta(CartaMaestraId.of(carta.getId()), carta.getPoder(), false, true, carta.getUri()))
                 .collect(Collectors.toList());
         cartas.removeIf(cartaMaestra -> lista.stream().anyMatch(carta -> {
             var id = carta.value().cartaId().value();

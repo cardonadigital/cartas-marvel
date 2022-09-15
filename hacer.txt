@@ -8,3 +8,4 @@ poner carta
 
 
 traer mazo del jugador
+carta-cartamaestra

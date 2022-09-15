@@ -10,7 +10,11 @@ import org.example.cardgame.usecase.gateway.JuegoDomainEventRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -41,7 +45,6 @@ public class FinalizarRondaUseCase extends UseCaseForCommand<FinalizarRondaComma
                                     partidaOrdenada.put(puntos, jugadorId.value());
                                     cartasEnTablero.addAll(cartas);
                                 });
-
                     });
 
                     var competidores = partidaOrdenada.values()
@@ -49,13 +52,31 @@ public class FinalizarRondaUseCase extends UseCaseForCommand<FinalizarRondaComma
                             .map(JugadorId::of)
                             .collect(Collectors.toSet());
                     var partida =  partidaOrdenada.firstEntry();
+
+                    if (partida == null){
+                        juego.terminarRonda(juego.tablero().identity(), competidores);
+                        return juego.getUncommittedChanges();
+                    }
                     var ganadorId = partida.getValue();
                     var puntos = partida.getKey();
-
                     juego.asignarCartasAGanador(JugadorId.of(ganadorId), puntos, cartasEnTablero);
                     juego.terminarRonda(juego.tablero().identity(), competidores);
 
+                    /*//verificar ganador juego
+                    Map<Set<Carta>, String> cartasJugadores = new HashMap<>();
+                    juego.jugadores().forEach((uid, jugador)->{
+                        if (jugador.mazo().value().cartas().size() != 0){
+                            cartasJugadores.put(jugador.mazo().value().cartas(), jugador.alias());
+                        }
+                    });
+
+                    if (cartasJugadores.size() == 1){
+                        var alias = cartasJugadores.values().toString();
+                        juego.finalizarJuego(JugadorId.of(ganadorId), alias);
+                        System.out.println("juego finalizado");
+                    }*/
                     return juego.getUncommittedChanges();
+
                 }));
     }
 

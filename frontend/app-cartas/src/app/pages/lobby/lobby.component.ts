@@ -15,10 +15,10 @@ import { v4 as uuidv4, v4 } from 'uuid';
   styleUrls: ['./lobby.component.css'],
 })
 export class LobbyComponent implements OnInit {
-  idGame: string = uuidv4();
+  /* idGame: string = uuidv4(); */
 
   lobby: Lobby;
-  usuarios: Array<{ name: string }>;
+  usuarios: Array<{ name: string, id:string }>;
   lengthUsuario: number;
   href = this.router.url;
   id = this.href.substring(this.href.lastIndexOf('/') + 1);
@@ -33,8 +33,12 @@ export class LobbyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.backend.getJuego(this.idGame).subscribe({
-      next: (message: any) => console.log(message),
+    this.backend.getJuego(this.id).subscribe({
+      next: (message) => {
+        if (message.type = "cardgame.rondacreada") {
+          this.router.navigate([`/game/${this.id}`]);
+        }console.log(message);
+      },
       error: (error) => console.log('error'),
       complete: () => console.log('object'),
     });
@@ -51,6 +55,10 @@ export class LobbyComponent implements OnInit {
       this.lobby = response;
       this.usuarios = response.usuarios;
       this.lengthUsuario = response.usuarios.length;
+      /**
+       * borrar
+       */
+      this.getJugadorData();
     });
   }
 
@@ -75,21 +83,56 @@ export class LobbyComponent implements OnInit {
   /* entrarJuego(){
     this.router.navigate(['/game']);
   } */
-
-  entrarJuego() {
+  ////
+  async entrarJuego() {
+    let userData = JSON.parse(this.getJugadorData());
     this.juego = {
-      juegoId: this.idGame,
-      jugadores: { key1: 'value1', key2: 'value2' },
-      jugadorPrincipalId: 'sdd',
+      juegoId: this.id,
+      jugadores: userData,
+      jugadorPrincipalId: this.id,
     };
-    this.backend.crearJuego(this.juego).subscribe({
+    await this.backend.crearJuego(this.juego).subscribe({
       next: (juegodb) => {
         console.log(juegodb);
       },
       error:(error)=>console.log(error),
       complete:()=> console.log('juegocreado')
     });
-    this.backend.getJuego(this.idGame);
-    this.router.navigate(['/game']);
+
+    await this.backend.iniciarJuego(this.id).subscribe({
+      next: (juegodb) => {
+        console.log(juegodb);
+      },
+      error:(error)=>console.log(error),
+      complete:()=> console.log('juegocreado')
+    });
+
+    this.backend.getJuego(this.id).subscribe({
+      next: (juegodb) => {
+        console.log(juegodb);
+      },
+      error:(error)=>console.log(error),
+      complete:()=> console.log('juegocreado')
+    });
+    /* this.router.navigate(['/game']); */
+    console.log(this.usuarios);
+  }
+
+
+  getJugadorData():string{
+    let data:string;
+    for (let i = 0; i < this.usuarios.length; i++) {
+      let id = this.usuarios[i].id;
+      let name = this.usuarios[i].name;
+      if (i!= 0) {
+        data+= ',';
+      }else{
+        data = '';
+      }
+      data+= `"${id}"` + ':' + `"${name}"`;
+    }
+    data = `{${data}}`;
+    console.log(data);
+    return data;
   }
 }

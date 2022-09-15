@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
-import { arrayRemove, arrayUnion, collection, collectionData, doc, docData, Firestore, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
+import { arrayRemove, arrayUnion, collection, collectionData, doc, docData, Firestore, getDoc, setDoc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { query, where } from '@firebase/firestore';
 import { Observable } from 'rxjs';
 import { Lobby } from '../models/lobby.model';
@@ -71,6 +71,12 @@ export class LobbyService {
     await updateDoc(refUser, {
       usuarios: arrayRemove({name:name, id:idUser})
     })
+  }
+
+  async deleteDocument(id){
+    const data = collection(this.fireStore, 'lobbies');
+
+    await deleteDoc(doc(data, id));
   }
 
 

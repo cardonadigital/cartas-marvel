@@ -11,30 +11,13 @@ import java.util.Set;
  */
 public class JugadorFactory {
     private final Set<Jugador> jugadores;
-
-    /**
-     * Instantiates a new Jugador factory.
-     */
-    public JugadorFactory() {
+    public JugadorFactory(){
         jugadores = new HashSet<>();
     }
-
-    /**
-     * Agregar jugador.
-     *
-     * @param jugadorId the jugador id
-     * @param alias     the alias
-     * @param mazo      the mazo
-     */
-    public void agregarJugador(JugadorId jugadorId, String alias, Mazo mazo) {
-        jugadores.add(new Jugador(jugadorId, alias, mazo));
+    public void agregarJugador(JugadorId jugadorId, String alias, Mazo mazo){
+        jugadores.add(new Jugador(jugadorId, alias,  mazo));
     }
 
-    /**
-     * Gets jugadores.
-     *
-     * @return the jugadores
-     */
     protected Set<Jugador> getJugadores() {
         return jugadores;
     }
