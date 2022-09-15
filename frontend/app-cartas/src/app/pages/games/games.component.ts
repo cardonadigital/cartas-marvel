@@ -80,4 +80,8 @@ export class GamesComponent implements OnInit{
     this.router.navigate(['/gamesDb']);
   }
 
+  myListaJuegos(){
+    this.router.navigate(['/myGames']);
+  }
+
 }

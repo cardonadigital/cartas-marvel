@@ -7,6 +7,7 @@ import { LobbyComponent } from './pages/lobby/lobby.component';
 import { GameComponent } from './pages/game/game.component';
 import { GamesDbComponent } from './games/games-db/games-db.component';
 import { WinnerComponent } from './pages/winner/winner.component';
+import { MyGamesComponent } from './games/my-games/my-games.component';
 
 const routes: Routes = [
   {path:'', component:LogingComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:'game/:id', component:GameComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))},
   {path:'lobby/:id', component:LobbyComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))},
   {path:'gamesDb', component:GamesDbComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))},
-  {path:'winner/:id', component:WinnerComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))}
+  {path:'winner/:id', component:WinnerComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))},
+  {path:'myGames', component:MyGamesComponent, ...canActivate(()=> redirectUnauthorizedTo(['/']))}
 ];
 
 @NgModule({

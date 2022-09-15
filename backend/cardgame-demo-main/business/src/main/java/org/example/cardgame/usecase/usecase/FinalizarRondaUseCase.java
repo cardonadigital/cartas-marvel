@@ -38,12 +38,14 @@ public class FinalizarRondaUseCase extends UseCaseForCommand<FinalizarRondaComma
                     TreeMap<Integer, String> partidaOrdenada = new TreeMap<>((t1, t2) -> t2 - t1);
                     Set<Carta> cartasEnTablero = new HashSet<>();
                     juego.tablero().partida().forEach((jugadorId, cartas) -> {
+                        /*cartasEnTablero.add(cartas.iterator().next());*/
                         cartas.stream()
                                 .map(c -> c.value().poder())
                                 .reduce(Integer::sum)
                                 .ifPresent(puntos -> {
                                     partidaOrdenada.put(puntos, jugadorId.value());
-                                    cartasEnTablero.addAll(cartas);
+                                    cartasEnTablero.add(cartas.iterator().next());
+                                    /*cartasEnTablero.addAll(cartas);*/
                                 });
                     });
 
@@ -59,6 +61,9 @@ public class FinalizarRondaUseCase extends UseCaseForCommand<FinalizarRondaComma
                     }
                     var ganadorId = partida.getValue();
                     var puntos = partida.getKey();
+
+                    //verificar ganador
+
                     juego.asignarCartasAGanador(JugadorId.of(ganadorId), puntos, cartasEnTablero);
                     juego.terminarRonda(juego.tablero().identity(), competidores);
 

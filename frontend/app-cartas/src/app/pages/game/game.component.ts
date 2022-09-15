@@ -49,7 +49,9 @@ export class GameComponent implements OnInit {
             this.agregarCartaTablero();
             break;
           case "cardgame.juegofinalizado":
+            console.log('finalizadolllllllllllllllllllllllllll');
             this.router.navigate([`/winner/${this.idGame}`]);
+            this.router.navigate([`/winner/err`]);
             break;
           default:
             break;
@@ -119,7 +121,7 @@ export class GameComponent implements OnInit {
         console.log(juegodb);
       },
       error:(error)=>console.log(error),
-      complete:()=> console.log('juegocreado')
+      complete:()=> console.log('rondainiciada')
     });
     /* if (this.idUser == this.idGame) {
       this.back.iniciarRonda(this.idGame).subscribe({

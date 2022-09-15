@@ -7,7 +7,7 @@
 
 
 <div class="">
-    <ul class="list-group mt-5 d-flex align-items-center" *ngFor="let juego of juegos;let i=index">
+    <ul class="list-group mt-5 d-flex align-items-center" *ngFor="let juego of myJuegos;let i=index">
         <li class="list-group-item row text-center carta">
             <h4>juego</h4>
             <p>{{juego.id}}</p>
@@ -17,3 +17,5 @@
         </li>
       </ul>
 </div>
+
+<!-- <button (click)="agregarJuegos()">probar</button> -->

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LobbyService } from '../../services/lobby.service';
@@ -14,7 +14,7 @@ import { v4 as uuidv4, v4 } from 'uuid';
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.css'],
 })
-export class LobbyComponent implements OnInit {
+export class LobbyComponent implements OnInit, OnDestroy {
   /* idGame: string = uuidv4(); */
 
   lobby: Lobby;
@@ -31,6 +31,7 @@ export class LobbyComponent implements OnInit {
     private lobbyService: LobbyService,
     private backend: BackendService
   ) {}
+  
 
   ngOnInit(): void {
     this.backend.getJuego(this.id).subscribe({
@@ -42,13 +43,6 @@ export class LobbyComponent implements OnInit {
       error: (error) => console.log('error'),
       complete: () => console.log('object'),
     });
-    console.log('backinfo');
-
-    /* this.lobbyService.getLobby('1THZ6OUUasVBb3IMbBgsH3unwCz2').then(response=> {
-      console.log(response.usuarios, this.id);
-      this.lobby = response;
-      this.usuarios = response.usuarios;
-    }); */
 
     this.lobbyService.getLobby(this.id).subscribe((response) => {
       console.log(response);
@@ -61,6 +55,12 @@ export class LobbyComponent implements OnInit {
       this.getJugadorData();
     });
   }
+
+  ngOnDestroy(): void {
+    this.backend.close();
+  }
+
+  ///metodos
 
   logOut() {
     this.authService
