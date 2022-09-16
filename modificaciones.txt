@@ -1,6 +1,0 @@
-crear comando
-crear commanhandle
-crear usecase (quitarcartamazo)
-juego root quitarcartatablero--eventchange--evento
-
-quitarcartatablero**
