@@ -32,7 +32,8 @@ public class IniciarCuentaRegresivaUseCase extends UseCaseForEvent<RondaIniciada
             .flatMapMany(events -> {
                 var juego = Juego.from(JuegoId.of(event.aggregateRootId()), events);
                 finalizarCommand.setJuegoId(event.aggregateRootId());
-                var tiempo = juego.tablero().tiempo();
+                /*var tiempo = juego.tablero().tiempo();*/
+                var tiempo = 10;
                 var tableroId = juego.tablero().identity();
                 return Flux.interval(Duration.ofSeconds(1))
                         .onBackpressureBuffer(1)

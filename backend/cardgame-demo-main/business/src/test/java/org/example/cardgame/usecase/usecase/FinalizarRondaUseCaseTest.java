@@ -66,23 +66,23 @@ public class FinalizarRondaUseCaseTest {
         var jugadorId = JugadorId.of("yyyyy");
         var jugador2Id = JugadorId.of("hhhhhh");
         var carta1 = new Carta(
-                CartaMaestraId.of("xxxxx"),
+                CartaMaestraId.of("carta1"),
                 20,
                 false, true, "img.jpg"
         );
         var carta11 = new Carta(
-                CartaMaestraId.of("kkkkk"),
+                CartaMaestraId.of("carta11"),
                 40,
                 false, true, "img.jpg"
         );
         var carta2 = new Carta(
-                CartaMaestraId.of("eeeee"),
-                10,
+                CartaMaestraId.of("carta2"),
+                15,
                 false, true, "img.jpg"
         );
         var carta22 = new Carta(
-                CartaMaestraId.of("ddddd"),
-                15,
+                CartaMaestraId.of("carta22"),
+                10,
                 false, true, "img.jpg"
         );
         var cartas = Set.of(carta1);
@@ -94,10 +94,11 @@ public class FinalizarRondaUseCaseTest {
                 new TableroCreado(tableroId, Set.of(jugadorId, jugador2Id)),
                 new RondaCreada(ronda, 30),
                 new RondaIniciada(),
-                new CartaPuestaEnTablero(tableroId, jugador2Id, carta2),
+                new CartaPuestaEnTablero(tableroId, jugadorId, carta1),
                 new CartaPuestaEnTablero(tableroId, jugadorId, carta11),
-                new CartaPuestaEnTablero(tableroId, jugador2Id, carta22),
-                new CartaPuestaEnTablero(tableroId, jugadorId, carta1)
+                new CartaPuestaEnTablero(tableroId, jugador2Id, carta2),
+                new CartaPuestaEnTablero(tableroId, jugador2Id, carta22)
+
         );
     }
 

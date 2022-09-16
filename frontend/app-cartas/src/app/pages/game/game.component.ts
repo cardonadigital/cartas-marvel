@@ -16,7 +16,7 @@ export class GameComponent implements OnInit {
   tiempo: number = 0;
   cartasTablero:Array<string> = new Array();
   botonHabilitado:boolean = false;
-  ronda:any;
+  ronda:any = 1;
 
   //id page
   href = this.router.url;
@@ -49,10 +49,14 @@ export class GameComponent implements OnInit {
             this.agregarCartaTablero();
             break;
           case "cardgame.juegofinalizado":
+            this.router.navigate([`/winner/${this.idGame}`]);
             console.log('finalizadolllllllllllllllllllllllllll');
             this.router.navigate([`/winner/${this.idGame}`]);
             this.router.navigate([`/winner/err`]);
             break;
+            /* case "cardgame.rondaterminada":
+              this.ronda++;
+            break; */
           default:
             break;
         }

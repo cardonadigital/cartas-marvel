@@ -5,8 +5,10 @@ import org.example.cardgame.domain.values.Carta;
 import org.example.cardgame.domain.values.JugadorId;
 import org.example.cardgame.domain.values.TableroId;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,13 +18,13 @@ import java.util.Set;
 public class Tablero extends Entity<TableroId> {
     private Integer tiempoEnSegundos;
     private Boolean estaHabilitado;
-    private final Map<JugadorId, Set<Carta>> partida;
+    private final Map<JugadorId, List<Carta>> partida;
 
     public Tablero(TableroId entityId, Set<JugadorId> jugadorIds) {
         super(entityId);
         this.partida = new HashMap<>();
         this.estaHabilitado = false;
-        jugadorIds.forEach(jugadorId -> partida.put(jugadorId, new HashSet<>()));
+        jugadorIds.forEach(jugadorId -> partida.put(jugadorId, new ArrayList<>()));
     }
 
     public void ajustarTiempo(Integer tiempo){
@@ -35,11 +37,11 @@ public class Tablero extends Entity<TableroId> {
     }
 
     public void adicionarPartida(JugadorId jugadorId, Carta carta){
-        partida.getOrDefault(jugadorId, new HashSet<>()).add(carta);
+        partida.getOrDefault(jugadorId, new ArrayList<>()).add(carta);
     }
 
     public void quitarCarta(JugadorId jugadorId, Carta carta){
-        partida.getOrDefault(jugadorId, new HashSet<>()).remove(carta);
+        partida.getOrDefault(jugadorId, new ArrayList<>()).remove(carta);
     }
 
     public void habilitarApuesta(){
@@ -58,13 +60,13 @@ public class Tablero extends Entity<TableroId> {
         return estaHabilitado;
     }
 
-    public Map<JugadorId, Set<Carta>> partida() {
+    public Map<JugadorId, List<Carta>> partida() {
         return partida;
     }
 
     public Integer getCartasEnTablero(){
         var numero = 0;
-        for (Map.Entry<JugadorId, Set<Carta>> entry : partida.entrySet()) {
+        for (Map.Entry<JugadorId, List<Carta>> entry : partida.entrySet()) {
             if (entry.getValue().size() != 0){
                 numero++;
             }

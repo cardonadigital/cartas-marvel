@@ -14,7 +14,7 @@ export interface TableroClass {
     id:         null;
     jugadores:  string[];
     habilitado: boolean;
-    cartas:     Carta[];
+    cartas:     Map<string, Carta[]>
 }
 
 export interface Carta {

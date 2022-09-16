@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../services/backend.service';
 import { Ganador } from 'src/app/models/juegoDb.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-winner',
@@ -13,7 +14,7 @@ export class WinnerComponent implements OnInit {
   jugadores:any = "";
   ganador : any = "";
 
-  constructor(private back:BackendService) { }
+  constructor(private back:BackendService, private router:Router) { }
 
   ngOnInit(): void {
     this.back.getJuegoFinalizado('1').subscribe({
@@ -25,6 +26,10 @@ export class WinnerComponent implements OnInit {
       complete:()=> console.log('finalizado')
     });;
     console.log(this.ganador);
+  }
+
+  volver(){
+    this.router.navigate(['/games']);
   }
 
 }

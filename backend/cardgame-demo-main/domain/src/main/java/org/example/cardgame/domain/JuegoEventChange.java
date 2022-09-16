@@ -3,6 +3,7 @@ package org.example.cardgame.domain;
 import co.com.sofka.domain.generic.EventChange;
 import org.example.cardgame.domain.events.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
@@ -56,7 +57,7 @@ public class JuegoEventChange extends EventChange {
         apply((RondaIniciada event) -> {
             juego.ronda = juego.ronda.iniciarRonda();
             juego.tablero.habilitarApuesta();
-            juego.tablero.partida().forEach((key, value) -> juego.tablero.partida().put(key,new HashSet<>()));
+            juego.tablero.partida().forEach((key, value) -> juego.tablero.partida().put(key,new ArrayList<>()));
         });
 
         apply((RondaTerminada event) -> {

@@ -40,8 +40,8 @@ export class MyGamesComponent implements OnInit {
       let jugadores: Map<string, Set<any>> = juego.jugadores;
       console.log(juego);
 
-      for (const k in jugadores) {
-        if (k == this.idUser) {
+      for (const jugador in jugadores) {
+        if (jugador == this.idUser) {
           this.myJuegos.push(juego);
         }
       }
